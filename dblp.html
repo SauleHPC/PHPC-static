@@ -36,6 +36,9 @@
 	      if (true) //suppress debug info
 	      {
 		  let deb = document.getElementById("debuginfo");
+		  deb.replaceChildren();
+		  let now = new Date();
+		  deb.textContent = now.toISOString();
 		  for (let k in results) {
 		      let r = document.createElement("p")
 		      r.textContent=Object.keys(results[k]).length;
