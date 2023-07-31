@@ -33,7 +33,7 @@
 	      all_promise.push(papersof(all_authors[a]));
 	  }
 	  Promise.all(all_promise).then((results) => {
-	      if (false) //suppress debug info
+	      if (true) //suppress debug info
 	      {
 		  let deb = document.getElementById("debuginfo");
 		  for (let k in results) {
@@ -59,7 +59,7 @@
       }
 
       update_view();
-      setInterval(update_view, 20000);
+      setInterval(update_view, 2000);
       
     </script>
   </body>
