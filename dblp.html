@@ -18,48 +18,49 @@
     <script type="module">
       import { papersof,printpaper,papertostring,dblpdicttosortedarray, renderpapers } from "./util.js";
 
-      //Erik: "84/5849"
-      //Tyler: "176/9191"
-      //Dong: "55/6260-1"
-      //Yonghong: "96/2570-1"
-      const all_authors = ["84/5849", "176/9191",  "55/6260-1", "96/2570-1"];
-      const author_highlight ={"84/5849" : "authorfaculty",
-			       "176/9191"  : "authorfaculty",
-			       "55/6260-1" : "authorfaculty",
-			       "96/2570-1" : "authorfaculty"};
-      let all_promise = [];
-      for (let a in all_authors) {
-	  all_promise.push(papersof(all_authors[a]));
+      function update_view() {
+	  //Erik: "84/5849"
+	  //Tyler: "176/9191"
+	  //Dong: "55/6260-1"
+	  //Yonghong: "96/2570-1"
+	  const all_authors = ["84/5849", "176/9191",  "55/6260-1", "96/2570-1"];
+	  const author_highlight ={"84/5849" : "authorfaculty",
+				   "176/9191"  : "authorfaculty",
+				   "55/6260-1" : "authorfaculty",
+				   "96/2570-1" : "authorfaculty"};
+	  let all_promise = [];
+	  for (let a in all_authors) {
+	      all_promise.push(papersof(all_authors[a]));
+	  }
+	  Promise.all(all_promise).then((results) => {
+	      if (false) //suppress debug info
+	      {
+		  let deb = document.getElementById("debuginfo");
+		  for (let k in results) {
+		      let r = document.createElement("p")
+		      r.textContent=Object.keys(results[k]).length;
+		      deb.appendChild(r);
+		  }
+	      }
+	      let all_papers = {};
+	      for (let k in results) {
+		  Object.assign(all_papers, results[k]);
+	      }
+	      
+	      //all papers should have the papers of all the authors by here
+	      let sortedpapers = dblpdicttosortedarray(all_papers);
+	      
+	      //probably no need to render more than 30 papers
+	      sortedpapers = sortedpapers.slice(0,30); 
+	      
+	      document.getElementById("paperlist").replaceChildren();
+	      renderpapers(document.getElementById("paperlist"), sortedpapers, author_highlight);
+	  });
       }
-      Promise.all(all_promise).then((results) => {
-	  {
-	      let deb = document.getElementById("debuginfo");
-	      let r0 = document.createElement("p")
-	      r0.textContent=Object.keys(results[0]).length;
-	      deb.appendChild(r0);
-	      let r1 = document.createElement("p")
-	      r1.textContent=Object.keys(results[1]).length;
-	      deb.appendChild(r1);
-	      let r2 = document.createElement("p")
-	      r2.textContent=Object.keys(results[2]).length;
-	      deb.appendChild(r2);
-	      let r3 = document.createElement("p")
-	      r3.textContent=Object.keys(results[3]).length;
-	      deb.appendChild(r3);
-	  }
-	  let all_papers = {};
-	  for (let k in results) {
-	      Object.assign(all_papers, results[k]);
-	  }
-	  
-	  //all papers should have the papers of all the authors by here
-	  let sortedpapers = dblpdicttosortedarray(all_papers);
 
-	  //probably no need to render more than 30 papers
-	  sortedpapers = sortedpapers.slice(0,30); 
-
-	  renderpapers(document.getElementById("paperlist"), sortedpapers, author_highlight);
-      });
+      update_view();
+      setInterval(update_view, 20000);
+      
     </script>
   </body>
 </html>
