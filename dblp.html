@@ -11,6 +11,8 @@
   </head>
   <body>
     <h1>Recent PHPC Lab papers</h1>
+    <div id="debuginfo">
+    </div>
     <div id="paperlist">
     </div>
     <script type="module">
@@ -30,6 +32,21 @@
 	  all_promise.push(papersof(all_authors[a]));
       }
       Promise.all(all_promise).then((results) => {
+	  {
+	      let deb = document.getElementById("debuginfo");
+	      let r0 = document.createElement("p")
+	      r0.textContent=Object.keys(results[0]).length;
+	      deb.appendChild(r0);
+	      let r1 = document.createElement("p")
+	      r1.textContent=Object.keys(results[1]).length;
+	      deb.appendChild(r1);
+	      let r2 = document.createElement("p")
+	      r2.textContent=Object.keys(results[2]).length;
+	      deb.appendChild(r2);
+	      let r3 = document.createElement("p")
+	      r3.textContent=Object.keys(results[3]).length;
+	      deb.appendChild(r3);
+	  }
 	  let all_papers = {};
 	  for (let k in results) {
 	      Object.assign(all_papers, results[k]);
