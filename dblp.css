@@ -1,0 +1,9 @@
+.title {
+    font-weight: bold;
+}
+.authors {
+    font-style: italic;
+}
+.authorfaculty{
+    text-decoration: underline;
+}

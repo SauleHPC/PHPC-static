@@ -1,0 +1,56 @@
+<html>
+  <head>
+    <script type="importmap">
+      {
+	  "imports": {
+	      "util": "./util.js"
+	  }
+      }
+    </script>
+    <link rel="stylesheet" href="dblp.css">
+  </head>
+  <body>
+    <h1>Recent PHPC Lab papers</h1>
+    <div id="paperlist">
+    </div>
+    <script type="module">
+      import { papersof,printpaper,papertostring,dblpdicttosortedarray, renderpapers } from "./util.js";
+
+      //Erik: "84/5849"
+      //Tyler: "176/9191"
+      //Dong: "55/6260-1"
+      //Yonghong: "96/2570-1"
+      const all_authors = ["84/5849", "176/9191",  "55/6260-1", "96/2570-1"];
+      const author_highlight ={"84/5849" : "authorfaculty",
+			       "176/9191"  : "authorfaculty",
+			       "55/6260-1" : "authorfaculty",
+			       "96/2570-1" : "authorfaculty"};
+      let all_promise = [];
+      for (let a in all_authors) {
+	  all_promise.push(papersof(all_authors[a]));
+      }
+      Promise.all(all_promise).then((results) => {
+	  let all_papers = {};
+	  for (let k in results) {
+	      Object.assign(all_papers, results[k]);
+	  }
+	  //all papers should have the papers of all the authors by here
+//	  console.log(all_papers);
+	  let sortedpapers = dblpdicttosortedarray(all_papers);
+//	  console.log(sortedpapers);
+	  renderpapers(document.getElementById("paperlist"), sortedpapers, author_highlight);
+      });
+	  
+      
+//       papersof("84/5849")
+//     .then(papers=> {
+	
+// 	renderpapers(document.getElementById("paperlist"), dblpdicttosortedarray(papers));
+	
+// //	console.log(dblpdicttosortedarray(papers));
+// //	console.log(pp[0].inproceedings);
+// //	papertostring(pp[0].inproceedings);
+//     });
+    </script>
+  </body>
+</html>
