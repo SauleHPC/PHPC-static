@@ -113,14 +113,14 @@ export function dblpdicttosortedarray(papers) {
 export function renderpapers(domelement, paperarray, author_highlight) {
     for (let ind in paperarray) {
 	const this_paper = paperarray[ind];
-	try {
+//	try {
 	    //arxiv papers are marked informal for instance, skip them
 	    if (this_paper.publtype == 'informal')
 		continue;
 	    domelement.appendChild(HTMLofPaper(this_paper, author_highlight));
-	} catch(error) {
+//	} catch(error) {
 	    //if for anyreason, we can't render a paper, just skip it!
-	}
+//	}
     }
 }
 
