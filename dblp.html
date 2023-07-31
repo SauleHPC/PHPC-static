@@ -34,23 +34,15 @@
 	  for (let k in results) {
 	      Object.assign(all_papers, results[k]);
 	  }
+	  
 	  //all papers should have the papers of all the authors by here
-//	  console.log(all_papers);
 	  let sortedpapers = dblpdicttosortedarray(all_papers);
-//	  console.log(sortedpapers);
+
+	  //probably no need to render more than 30 papers
+	  sortedpapers = sortedpapers.slice(0,30); 
+
 	  renderpapers(document.getElementById("paperlist"), sortedpapers, author_highlight);
       });
-	  
-      
-//       papersof("84/5849")
-//     .then(papers=> {
-	
-// 	renderpapers(document.getElementById("paperlist"), dblpdicttosortedarray(papers));
-	
-// //	console.log(dblpdicttosortedarray(papers));
-// //	console.log(pp[0].inproceedings);
-// //	papertostring(pp[0].inproceedings);
-//     });
     </script>
   </body>
 </html>
