@@ -131,7 +131,7 @@ export function HTMLofAuthors(authorarray, author_highlight) {
 	let this_author_span = document.createElement("span");
 	const this_author = authorarray[indauthor];
 	let authorname = this_author["#text"]
-	    .replace(/\d+$/, ''); //strip numbers at the end of names (from dblp disambiguation)
+	    .replace(/ \d+$/, ''); //strip numbers at the end of names (from dblp disambiguation)
 	this_author_span.textContent = authorname;
 
 	//handle highlight
