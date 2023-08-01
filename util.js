@@ -38,25 +38,6 @@ function parseXml(xml, arrayTags) {
     return result;
 }
 
-export async function postJSON(url ,data) {
-    try {
-	const response = await fetch(url, {
-	    method: "POST",
-	    headers: {
-		"Content-Type": "application/json",
-	    },
-	    body: JSON.stringify(data),
-	});
-	
-	const result = await response.json();
-	//console.log("Success:", result);
-	return result;
-    } catch (error) {
-	//console.error("Error:", error);
-	return Promise.reject("Error:", error);
-    }
-}
-
 // return a dblp object extracted from the xml returned by dblp for a particular dblppid.
 //
 // the pid information is found on dblp's page as the permanent identifier of an author.
