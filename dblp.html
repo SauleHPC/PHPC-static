@@ -40,7 +40,8 @@
 		      let deb = document.getElementById("lastupdated");
 		      if (deb == null)
 			  throw "can't find an element called lastupdated";
-		      deb.replaceChildren();
+		      deb.innerHTML = "";
+		      //deb.replaceChildren();
 		      let now = new Date();
 		      deb.textContent = now.toISOString();
 		  }
