@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
   <head>
     <script type="importmap">
@@ -7,10 +8,11 @@
 	  }
       }
     </script>
-    <link rel="stylesheet" href="dblp.css">
+    <link rel="stylesheet" href="dblp.css" />
   </head>
   <body>
     <h1>Recent PHPC Lab papers</h1>
+    <p>(updated <span id="lastupdated"></span>)</p>
     <div id="debuginfo">
     </div>
     <div id="paperlist">
@@ -33,12 +35,16 @@
 	      all_promise.push(papersof(all_authors[a]));
 	  }
 	  Promise.all(all_promise).then((results) => {
-	      if (true) //suppress debug info
-	      {
-		  let deb = document.getElementById("debuginfo");
+	      if (true) {
+		  let deb = document.getElementById("lastupdated");
 		  deb.replaceChildren();
 		  let now = new Date();
 		  deb.textContent = now.toISOString();
+	      }
+	      if (false) //suppress debug info
+	      {
+		  let deb = document.getElementById("debuginfo");
+		  deb.replaceChildren();
 		  for (let k in results) {
 		      let r = document.createElement("p")
 		      r.textContent=Object.keys(results[k]).length;
@@ -61,8 +67,10 @@
 	  });
       }
 
-      update_view();
-      setInterval(update_view, 2000);
+      window.addEventListener('load', ()=> {
+	update_view();
+	setInterval(update_view, 20000);
+	});
       
     </script>
   </body>
