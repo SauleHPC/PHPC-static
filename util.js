@@ -1,3 +1,4 @@
+//parse function from https://stackoverflow.com/questions/4200913/xml-to-javascript-object
 function parseXml(xml, arrayTags) {
     let dom = null;
     if (window.DOMParser) dom = (new DOMParser()).parseFromString(xml, "text/xml");
