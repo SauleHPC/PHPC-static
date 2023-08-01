@@ -38,17 +38,24 @@
 	      .then((results) => {
 		  if (true) {
 		      let deb = document.getElementById("lastupdated");
+		      if (deb == null)
+			  throw "can't find an element called lastupdated";
 		      deb.replaceChildren();
 		      let now = new Date();
 		      deb.textContent = now.toISOString();
 		  }
 		  {
 		      let deb = document.getElementById("debuginfo");
+		      if (deb == null)
+			  throw "can't find an element called debuginfo";
+
 		      deb.replaceChildren();
 		  }
 		  if (false) //suppress debug info
 		  {
 		      let deb = document.getElementById("debuginfo");
+		      if (deb == null)
+			  throw "can't find an element called debuginfo";
 		      //deb.replaceChildren();
 		      for (let k in results) {
 			  let r = document.createElement("p")
@@ -67,8 +74,11 @@
 		  //probably no need to render more than 30 papers
 		  sortedpapers = sortedpapers.slice(0,30); 
 		  
-		  document.getElementById("paperlist").replaceChildren();
-		  renderpapers(document.getElementById("paperlist"), sortedpapers, author_highlight);
+		  let paperlistelem = document.getElementById("paperlist");
+		  if (paperlistelem == null)
+		      throw "can't find an element called paperlist";
+		  paperlistelem.replaceChildren();
+		  renderpapers(paperlistelem, sortedpapers, author_highlight);
 	      })
 	      .catch(error => {
 		  console.error(error);
@@ -80,9 +90,13 @@
 	      });
       }
 
-      window.addEventListener('load', ()=> {
-	update_view();
-	setInterval(update_view, 20000);
+	window.addEventListener('load', ()=> {
+		    setInterval(update_view, 4000);
+		    try {
+		    update_view();
+		    } catch (error) { //ignore error
+		    }
+
 	});
       
     </script>
