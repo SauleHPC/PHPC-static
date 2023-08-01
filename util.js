@@ -61,14 +61,25 @@ export async function postJSON(url ,data) {
 export async function fetchdblp(dblpid) {
     const loading = async() => {
 	const response = await fetch("https://dblp.org/pid/"+dblpid+".xml");
+	if (response.status != 200)
+	    throw "no response";
 	const xml = await response.text();
 	return xml;
     }
-    return loading().then(text =>{
+    return loading()
+	.catch(error => {
+	    let deb = document.getElementById("debuginfo");
+	    let r = document.createElement("p")
+	    r.textContent="could not fetch dblp for "+dblpid;
+	    deb.appendChild(r);
+	    return Promise.reject(error);
+	})
+	.then(text =>{
 	return parseXml(text);
     });
 }
 
+//returns a dictionary of objects where the key are dblpkey and the values are objects representing the papers
 export async function papersof(dblpid) {
     return fetchdblp(dblpid)
     .then(i=> {
@@ -115,9 +126,8 @@ export function dblpdicttosortedarray(papers) {
     return pp;
 }
 
-
+//renders the papers in paperarray by appending into domelement
 export function renderpapers(domelement, paperarray, author_highlight) {
-    
     //console.log(paperarray);
     paperarray.forEach(this_paper => {
 	try {
@@ -131,6 +141,7 @@ export function renderpapers(domelement, paperarray, author_highlight) {
     });
 }
 
+//returns a dom element representing the authors in authorarray
 export function HTMLofAuthors(authorarray, author_highlight) {
     let authorspan = document.createElement("span");
     authorspan.setAttribute("class", "authors");
@@ -158,6 +169,7 @@ export function HTMLofAuthors(authorarray, author_highlight) {
     return authorspan;    
 }
 
+//returns a dom element representing the paper represented by dblppaper
 export function HTMLofPaper(dblppaper, author_highlight) {
     const para = document.createElement("p");
 

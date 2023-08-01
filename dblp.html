@@ -41,10 +41,14 @@
 		  let now = new Date();
 		  deb.textContent = now.toISOString();
 	      }
-	      if (false) //suppress debug info
 	      {
 		  let deb = document.getElementById("debuginfo");
 		  deb.replaceChildren();
+	      }
+	      if (false) //suppress debug info
+	      {
+		  let deb = document.getElementById("debuginfo");
+		  //deb.replaceChildren();
 		  for (let k in results) {
 		      let r = document.createElement("p")
 		      r.textContent=Object.keys(results[k]).length;
