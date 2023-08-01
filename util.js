@@ -104,7 +104,13 @@ export function dblpdicttosortedarray(papers) {
 	pp.push(papers[key]);
     }
 
-    pp.sort((a,b) => (a.year["#text"] < b.year["#text"]));
+    console.log(pp);
+
+    pp.sort((a,b) => {
+	let a_year = parseInt(a.year["#text"]);
+	let b_year = parseInt(b.year["#text"]);
+	return b_year - a_year;
+    });
 
     return pp;
 }
