@@ -49,8 +49,8 @@
 		      let deb = document.getElementById("debuginfo");
 		      if (deb == null)
 			  throw "can't find an element called debuginfo";
-
-		      deb.replaceChildren();
+		      //deb.replaceChildren();
+		      deb.innerHTML = "";
 		  }
 		  if (false) //suppress debug info
 		  {
@@ -78,7 +78,8 @@
 		  let paperlistelem = document.getElementById("paperlist");
 		  if (paperlistelem == null)
 		      throw "can't find an element called paperlist";
-		  paperlistelem.replaceChildren();
+		  //paperlistelem.replaceChildren();
+		  paperlistelem.innerHTML = "";
 		  renderpapers(paperlistelem, sortedpapers, author_highlight);
 	      })
 	      .catch(error => {
