@@ -75,8 +75,7 @@ export async function papersof(dblpid) {
 	const papers = i["dblpperson"]["r"];
 	let dict = {}
 	//console.log(papers);
-	for (let key in papers) {
-	    const pobj = papers[key];
+	papers.forEach(pobj => {
 	    let thepaper = undefined;
 	    if (pobj.inproceedings != undefined) {
 		thepaper = pobj.inproceedings;
@@ -88,7 +87,7 @@ export async function papersof(dblpid) {
 	    }
 	    if (thepaper != undefined)
 		dict[thepaper.key] = thepaper;
-	}
+	});
 	return dict;
     });
 }
@@ -101,7 +100,7 @@ export function dblpdicttosortedarray(papers) {
 	pp.push(papers[key]);
     }
 
-    console.log(pp);
+    //console.log(pp);
 
     pp.sort((a,b) => {
 	//sort per year
@@ -118,17 +117,18 @@ export function dblpdicttosortedarray(papers) {
 
 
 export function renderpapers(domelement, paperarray, author_highlight) {
-    for (let ind in paperarray) {
-	const this_paper = paperarray[ind];
+    
+    //console.log(paperarray);
+    paperarray.forEach(this_paper => {
 	try {
 	    //arxiv papers are marked informal for instance, skip them
-	    if (this_paper.publtype == 'informal')
-		continue;
-	    domelement.appendChild(HTMLofPaper(this_paper, author_highlight));
+	    if (this_paper.publtype != 'informal') {
+		domelement.appendChild(HTMLofPaper(this_paper, author_highlight));
+	    }
 	} catch(error) {
 	    //if for anyreason, we can't render a paper, just skip it!
 	}
-    }
+    });
 }
 
 export function HTMLofAuthors(authorarray, author_highlight) {
