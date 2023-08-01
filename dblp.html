@@ -44,13 +44,14 @@
 		      //deb.replaceChildren();
 		      let now = new Date();
 		      deb.textContent = now.toISOString();
+		      
 		  }
 		  {
 		      let deb = document.getElementById("debuginfo");
 		      if (deb == null)
 			  throw "can't find an element called debuginfo";
 		      //deb.replaceChildren();
-		      deb.innerHTML = "";
+		      deb.innerHTML = window.navigator.userAgent;;
 		  }
 		  if (false) //suppress debug info
 		  {
