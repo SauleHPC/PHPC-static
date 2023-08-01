@@ -18,7 +18,7 @@
     <div id="paperlist">
     </div>
     <script type="module">
-      import { papersof,printpaper,papertostring,dblpdicttosortedarray, renderpapers } from "./util.js";
+      import { papersof,printpaper,papertostring,dblpdicttosortedarray, renderpapers, mylocallog } from "./util.js";
 
       function update_view() {
 	  //Erik: "84/5849"
@@ -81,12 +81,7 @@
 		  renderpapers(paperlistelem, sortedpapers, author_highlight);
 	      })
 	      .catch(error => {
-		  console.error(error);
-		  let deb = document.getElementById("debuginfo");
-		  let r = document.createElement("p")
-		  r.textContent="Something went wrong in processing data. cause: "+error.toString();
-		  deb.appendChild(r);
-
+		  mylocallog(error); 
 	      });
       }
 
@@ -95,6 +90,7 @@
 		    try {
 		    update_view();
 		    } catch (error) { //ignore error
+			mylocallog(error); 
 		    }
 
 	});

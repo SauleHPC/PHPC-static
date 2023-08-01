@@ -38,6 +38,17 @@ function parseXml(xml, arrayTags) {
     return result;
 }
 
+export function mylocallog(error) {
+    console.error(error);
+    let deb = document.getElementById("debuginfo");
+    let r = document.createElement("p")
+    r.textContent="Something went wrong in processing data. cause: "+error.toString();
+    if ('stack' in error) {
+	r.textContent+= ". stack: "+error.stack;
+    }
+    deb.appendChild(r);
+}
+
 // return a dblp object extracted from the xml returned by dblp for a particular dblppid.
 //
 // the pid information is found on dblp's page as the permanent identifier of an author.
