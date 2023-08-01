@@ -34,41 +34,50 @@
 	  for (let a in all_authors) {
 	      all_promise.push(papersof(all_authors[a]));
 	  }
-	  Promise.all(all_promise).then((results) => {
-	      if (true) {
-		  let deb = document.getElementById("lastupdated");
-		  deb.replaceChildren();
-		  let now = new Date();
-		  deb.textContent = now.toISOString();
-	      }
-	      {
-		  let deb = document.getElementById("debuginfo");
-		  deb.replaceChildren();
-	      }
-	      if (false) //suppress debug info
-	      {
-		  let deb = document.getElementById("debuginfo");
-		  //deb.replaceChildren();
-		  for (let k in results) {
-		      let r = document.createElement("p")
-		      r.textContent=Object.keys(results[k]).length;
-		      deb.appendChild(r);
+	  Promise.all(all_promise)
+	      .then((results) => {
+		  if (true) {
+		      let deb = document.getElementById("lastupdated");
+		      deb.replaceChildren();
+		      let now = new Date();
+		      deb.textContent = now.toISOString();
 		  }
-	      }
-	      let all_papers = {};
-	      for (let k in results) {
-		  Object.assign(all_papers, results[k]);
-	      }
-	      
-	      //all papers should have the papers of all the authors by here
-	      let sortedpapers = dblpdicttosortedarray(all_papers);
-	      
-	      //probably no need to render more than 30 papers
-	      sortedpapers = sortedpapers.slice(0,30); 
-	      
-	      document.getElementById("paperlist").replaceChildren();
-	      renderpapers(document.getElementById("paperlist"), sortedpapers, author_highlight);
-	  });
+		  {
+		      let deb = document.getElementById("debuginfo");
+		      deb.replaceChildren();
+		  }
+		  if (false) //suppress debug info
+		  {
+		      let deb = document.getElementById("debuginfo");
+		      //deb.replaceChildren();
+		      for (let k in results) {
+			  let r = document.createElement("p")
+			  r.textContent=Object.keys(results[k]).length;
+			  deb.appendChild(r);
+		      }
+		  }
+		  let all_papers = {};
+		  for (let k in results) {
+		      Object.assign(all_papers, results[k]);
+		  }
+		  
+		  //all papers should have the papers of all the authors by here
+		  let sortedpapers = dblpdicttosortedarray(all_papers);
+		  
+		  //probably no need to render more than 30 papers
+		  sortedpapers = sortedpapers.slice(0,30); 
+		  
+		  document.getElementById("paperlist").replaceChildren();
+		  renderpapers(document.getElementById("paperlist"), sortedpapers, author_highlight);
+	      })
+	      .catch(error => {
+		  console.error(error);
+		  let deb = document.getElementById("debuginfo");
+		  let r = document.createElement("p")
+		  r.textContent="Something went wrong in processing data. cause: "+error.toString();
+		  deb.appendChild(r);
+
+	      });
       }
 
       window.addEventListener('load', ()=> {
