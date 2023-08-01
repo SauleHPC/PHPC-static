@@ -65,10 +65,6 @@ export async function fetchdblp(dblpid) {
 	return xml;
     }
     return loading().then(text =>{
-//	let parser = new DOMParser();
-//	let xmlDoc = parser.parseFromString(text,"text/xml");
-//	for (let i in xmlDoc.documentElement[0])
-	//	return xmlDoc;
 	return parseXml(text);
     });
 }
