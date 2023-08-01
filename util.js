@@ -57,6 +57,11 @@ export async function postJSON(url ,data) {
     }
 }
 
+// return a dblp object extracted from the xml returned by dblp for a particular dblppid.
+//
+// the pid information is found on dblp's page as the permanent identifier of an author.
+// Go to that author page and check the persistent url under "share"
+//
 //erik's 84/5849
 export async function fetchdblp(dblpid) {
     const loading = async() => {
