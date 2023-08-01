@@ -107,9 +107,13 @@ export function dblpdicttosortedarray(papers) {
     console.log(pp);
 
     pp.sort((a,b) => {
+	//sort per year
 	let a_year = parseInt(a.year["#text"]);
 	let b_year = parseInt(b.year["#text"]);
-	return b_year - a_year;
+	if (b_year - a_year != 0)
+	    return b_year - a_year;
+	//then per mdate
+	return ('' + b.mdate).localeCompare(a.mdate);
     });
 
     return pp;
