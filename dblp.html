@@ -12,11 +12,9 @@
   </head>
   <body>
     <h1>Recent PHPC Lab papers</h1>
-    <p class="updateinfo">(updated <span id="lastupdated"></span>)</p>
-    <div id="debuginfo">
-    </div>
-    <div id="paperlist">
-    </div>
+    <p class="updateinfo">(updated <span id="lastupdated"></span>)</p>  <!-- display:none in css-->
+    <div id="debuginfo"></div> <!-- display:none in css-->
+    <div id="paperlist"></div>
     <script type="module">
       import { papersof,printpaper,papertostring,dblpdicttosortedarray, renderpapers, mylocallog } from "./util.js";
 
@@ -51,7 +49,7 @@
 		      if (deb == null)
 			  throw "can't find an element called debuginfo";
 		      //deb.replaceChildren();
-		      deb.innerHTML = window.navigator.userAgent;;
+		      deb.innerHTML = window.navigator.userAgent;
 		  }
 		  if (false) //suppress debug info
 		  {

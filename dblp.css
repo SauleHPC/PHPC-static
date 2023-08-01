@@ -9,5 +9,9 @@
 }
 
 .updateinfo{
-    //display: none;
+    display: none;
+}
+
+#debuginfo {
+    display: none;
 }
