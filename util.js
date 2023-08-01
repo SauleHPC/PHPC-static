@@ -112,7 +112,7 @@ export function dblpdicttosortedarray(papers) {
 	let b_year = parseInt(b.year["#text"]);
 	if (b_year - a_year != 0)
 	    return b_year - a_year;
-	//then per mdate
+	//then per mdate. modifed date isn't great, but it has a chance of being a bit right and we have nothing else to go by anyway
 	return ('' + b.mdate).localeCompare(a.mdate);
     });
 
