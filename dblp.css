@@ -15,3 +15,9 @@
 #debuginfo {
     display: none;
 }
+
+body {
+    width: 97vw;
+    height: 97vh;
+    overflow: hidden;
+}
