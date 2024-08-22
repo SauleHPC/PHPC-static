@@ -23,11 +23,13 @@
 	  //Tyler: "176/9191"
 	  //Dong: "55/6260-1"
 	  //Yonghong: "96/2570-1"
-	  const all_authors = ["84/5849", "176/9191",  "55/6260-1", "96/2570-1"];
+	  //Jinzhen: "156/9939"
+	  const all_authors = ["84/5849", "176/9191",  "55/6260-1", "96/2570-1", "156/9939"];
 	  const author_highlight ={"84/5849" : "authorfaculty",
 				   "176/9191"  : "authorfaculty",
 				   "55/6260-1" : "authorfaculty",
-				   "96/2570-1" : "authorfaculty"};
+				   "96/2570-1" : "authorfaculty",
+				  "156/9939" : "authorfaculty"};
 	  let all_promise = [];
 	  for (let a in all_authors) {
 	      all_promise.push(papersof(all_authors[a]));
