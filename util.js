@@ -77,24 +77,27 @@ export async function fetchdblp(dblpid) {
 }
 
 //returns a dictionary of objects where the key are dblpkey and the values are objects representing the papers
-export async function papersof(dblpid) {
+export async function papersof(dblpid, until) {
     return fetchdblp(dblpid)
     .then(i=> {
 	const papers = i["dblpperson"]["r"];
 	let dict = {}
-	//console.log(papers);
 	papers.forEach(pobj => {
+	    var expectyear = undefined
 	    let thepaper = undefined;
 	    if (pobj.inproceedings != undefined) {
 		thepaper = pobj.inproceedings;
 		thepaper.dblptype = "inproceedings";
+		expectyear = parseInt(pobj.inproceedings.year["#text"])
 	    }
 	    if (pobj.article != undefined) {
 		thepaper = pobj.article;
 		thepaper.dblptype = "article";
+		expectyear = parseInt(pobj.article.year["#text"])
 	    }
 	    if (thepaper != undefined)
-		dict[thepaper.key] = thepaper;
+		if (until == undefined || expectyear <= until)
+		    dict[thepaper.key] = thepaper;
 	});
 	return dict;
     });
